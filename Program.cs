@@ -22,10 +22,10 @@ namespace SQLite_notes_cours
         // création du ficher de la base de données
         SQLiteConnection.CreateFile(dbPath);
 
-        // création de la coonextion à la base de données
+        // création de la connection à la base de données
         SQLiteConnection con = new SQLiteConnection("Data Source=database.sqlite;Veriosn=3;"); // la chaîne d'identification de la base de données
 
-        // ouverture de la connextion
+        // ouverture de la connection
         con.Open();
 
         // des requêtes SQL
@@ -39,7 +39,7 @@ namespace SQLite_notes_cours
         // exécution de la command
         command.ExecuteNonQuery();
 
-        // fermeture de la connexion
+        // fermeture de la connection
         con.Close();
       }
 
