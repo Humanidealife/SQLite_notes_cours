@@ -12,6 +12,14 @@ namespace SQLite_notes_cours
   {
     static void Main(string[] args)
     {
+      Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+      Console.WriteLine(Environment.MachineName);
+      Console.WriteLine(Environment.OSVersion);
+      Console.WriteLine(Environment.UserName);
+      Console.WriteLine(Environment.TickCount);
+
+
+
       // création de la base de données
       // pour tester si la base de données existe
       string dbPath = "database.sqlite";
