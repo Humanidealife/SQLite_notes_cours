@@ -18,7 +18,13 @@ namespace SQLite_notes_cours
       if(!File.Exists(dbPath)) CreateDB();
 
       //Lancement de la méthode AddData
-      AddData("AUPONT", "Anne");
+      // AddData("COUR", "Cédric");
+
+      // Lancement de la méthode ReadAllDta
+      // ReadAllData();
+
+      // Lancement de la méthode ReadPrenom
+      ReadPrenom("AUPONT");
 
       // création de la DB
       void CreateDB()
@@ -69,8 +75,56 @@ namespace SQLite_notes_cours
       command.ExecuteNonQuery();
 
       con.Close();
-
     }
+
+    // Méthode permettant de lire le contenu global d'une table de base de données
+    static void ReadAllData()
+    {
+      SQLiteConnection con = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+      con.Open();
+      string sql = "SELECT * FROM Clients";
+      SQLiteCommand command = new SQLiteCommand(sql, con);
+
+      SQLiteDataReader reader = command.ExecuteReader();
+      while (reader.Read())
+      {
+        Console.Write("Nom : " + reader.GetString(0));
+        Console.WriteLine(" Prénom : " + reader.GetString(1));
+      }
+      con.Close();
+    }
+
+    static void ReadPrenom(string n)
+    {
+      SQLiteConnection con = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+      con.Open();
+      string sql = "SELECT prenom FROM Clients WHERE nom = @nom";
+
+      SQLiteCommand command = new SQLiteCommand(sql, con);
+
+      command.Parameters.AddWithValue("@nom", n);
+      SQLiteDataReader reader = command.ExecuteReader();
+      reader.Read();
+
+      Console.WriteLine("Prénom : " + reader.GetString(0));
+      con.Close();
+    }
+
+
+    // Méthode pour supprimer des données qui a un ID spécifique
+    // static void DeleteData(int id)
+    // {
+    //   SQLiteConnection con = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+    //   con.Open();
+
+    //   string sql = "DELETE FROM Clients WHERE id = @id";
+    //   SQLiteCommand command = new SQLiteCommand(sql, con);
+    //   command.Parameters.AddWithValue("@id", id);
+
+    //   command.ExecuteNonQuery();
+
+    //   con.Close();
+    // }
 
   }
 }
